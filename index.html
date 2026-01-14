@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Portfolio | Reference Project</title>
+    <meta name="description" content="High-End Photography Portfolio">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link rel="preload" as="image" href="assets/hero-desktop.avif" media="(min-width: 768px)">
+    <link rel="preload" as="image" href="assets/hero-mobile.avif" media="(max-width: 767px)">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#0f0f0f', 
+                        'brand-gray': '#1a1a1a',
+                        'brand-accent': '#d4af37', 
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+
+</head>
+<body class="bg-brand-dark text-gray-200 antialiased font-sans selection:bg-brand-accent selection:text-brand-dark">
+
+
+    <header x-data="{ open: false }" class="fixed w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-serif text-2xl tracking-wider text-white hover:text-brand-accent transition-colors">
+                        Bergi<span class="text-brand-accent">.</span>PHOTO
+                    </a>
+                </div>
+
+                <nav class="hidden md:flex space-x-12">
+                    <a href="#portfolio" class="text-sm uppercase tracking-widest hover:text-brand-accent transition-colors">Portfolio</a>
+                    <a href="#about" class="text-sm uppercase tracking-widest hover:text-brand-accent transition-colors">About</a>
+                    <a href="#contact" class="text-sm uppercase tracking-widest hover:text-brand-accent transition-colors">Kontakt</a>
+                </nav>
+
+                <div class="md:hidden flex items-center">
+                    <button @click="open = !open" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="open" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             class="md:hidden bg-brand-gray absolute w-full border-b border-white/5">
+            <div class="px-4 pt-2 pb-6 space-y-4 text-center">
+                <a href="#portfolio" class="block py-2 text-sm uppercase tracking-widest hover:text-brand-accent">Portfolio</a>
+                <a href="#about" class="block py-2 text-sm uppercase tracking-widest hover:text-brand-accent">About</a>
+                <a href="#contact" class="block py-2 text-sm uppercase tracking-widest hover:text-brand-accent">Kontakt</a>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        
+        <div class="absolute inset-0 z-0">
+            <picture>
+                <source srcset="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2500&auto=format&fit=crop" 
+                        media="(min-width: 768px)" 
+                        type="image/avif">
+                <source srcset="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop" 
+                        media="(max-width: 767px)" 
+                        type="image/avif">
+                
+                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1920&auto=format&fit=crop" 
+                    alt="Portrait of a model in dramatic lighting" 
+                    class="w-full h-full object-cover"
+                    fetchpriority="high"
+                    decoding="sync">
+            </picture>
+            
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-brand-dark/90"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">
+            
+            <p class="text-brand-accent uppercase tracking-[0.4em] text-xs md:text-sm mb-6 opacity-0 animate-[fadeIn_1s_ease-out_0.5s_forwards]">
+                Fine Art Photography
+            </p>
+            
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-9xl text-white mb-8 leading-[0.9] opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards]">
+                Capturing the <br/>
+                <span class="italic font-light text-gray-300 relative inline-block">
+                    Unseen
+                    <span class="absolute -bottom-2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-accent to-transparent"></span>
+                </span>
+            </h1>
+
+            <p class="text-gray-400 max-w-lg mx-auto text-sm md:text-base font-light leading-relaxed mb-10 opacity-0 animate-[fadeIn_1s_ease-out_0.8s_forwards]">
+                Spezialisiert auf atmosphärische Portraits und emotionale Reportagen. 
+                Bilder, die Geschichten erzählen, wenn Worte fehlen.
+            </p>
+
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center opacity-0 animate-[fadeIn_1s_ease-out_1s_forwards]">
+                <a href="#portfolio" 
+                class="group relative px-8 py-3 bg-white text-brand-dark font-medium tracking-wider text-sm overflow-hidden transition-all hover:bg-brand-accent">
+                    <span class="relative z-10">VIEW WORK</span>
+                </a>
+                <a href="#contact" 
+                class="px-8 py-3 border border-white/20 text-white hover:border-white transition-colors text-sm tracking-wider">
+                    GET IN TOUCH
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-50 hidden md:block">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-24 bg-brand-dark" 
+         x-data="{ 
+            lightboxOpen: false,
+            activeImage: null,
+            images: [
+                { 
+                    src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80', 
+                    thumb: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                    title: 'The Silent Gaze', 
+                    category: 'Portrait' 
+                },
+                { 
+                    src: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80', 
+                    thumb: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                    title: 'Morning Fog', 
+                    category: 'Nature' 
+                },
+                { 
+                    src: 'https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80', 
+                    thumb: 'https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                    title: 'City Lights', 
+                    category: 'Urban' 
+                },
+                { 
+                    src: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80', 
+                    thumb: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                    title: 'Vintage Soul', 
+                    category: 'Fashion' 
+                },
+                { 
+                    src: 'https://images.unsplash.com/photo-1504198458649-3128b932f49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80', 
+                    thumb: 'https://images.unsplash.com/photo-1504198458649-3128b932f49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                    title: 'Stormy Sea', 
+                    category: 'Nature' 
+                },
+                { 
+                    src: 'https://images.unsplash.com/photo-1552168324-d612d77725e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80', 
+                    thumb: 'https://images.unsplash.com/photo-1552168324-d612d77725e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                    title: 'Abstract Shadows', 
+                    category: 'Fine Art' 
+                }
+            ],
+            open(index) {
+                this.activeImage = index;
+                this.lightboxOpen = true;
+                document.body.style.overflow = 'hidden'; // Scroll sperren
+            },
+            close() {
+                this.lightboxOpen = false;
+                this.activeImage = null;
+                document.body.style.overflow = ''; // Scroll freigeben
+            },
+            next() {
+                this.activeImage = (this.activeImage + 1) % this.images.length;
+            },
+            prev() {
+                this.activeImage = (this.activeImage - 1 + this.images.length) % this.images.length;
+            }
+         }"
+         @keydown.escape.window="close()"
+         @keydown.arrow-right.window="next()"
+         @keydown.arrow-left.window="prev()">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <h2 class="font-serif text-4xl text-white">Selected Works</h2>
+                    <div class="h-1 w-20 bg-brand-accent mt-4"></div>
+                </div>
+                <a href="#" class="hidden md:inline-block text-sm text-gray-400 hover:text-white transition-colors">Alle Projekte ansehen &rarr;</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="(img, index) in images" :key="index">
+                    <div @click="open(index)" class="group relative aspect-[3/4] overflow-hidden bg-brand-gray cursor-pointer">
+                        <img :src="img.thumb" 
+                            :alt="img.title" 
+                            loading="lazy"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all"></div>
+                        
+                        <div class="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                            <p x-text="img.category" class="text-brand-accent text-xs uppercase tracking-widest"></p>
+                            <h3 x-text="img.title" class="text-white font-serif text-xl"></h3>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div x-show="lightboxOpen" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-[100] bg-brand-dark/95 backdrop-blur-sm flex items-center justify-center p-4">
+            
+            <button @click="close()" class="absolute top-6 right-6 text-gray-400 hover:text-white z-50 p-2">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <button @click.stop="prev()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white p-4 hidden md:block">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button @click.stop="next()" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white p-4 hidden md:block">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+
+            <div class="relative max-w-5xl w-full max-h-screen p-2" @click.outside="close()">
+                <template x-if="activeImage !== null">
+                    <div class="relative">
+                        <img :src="images[activeImage].src" 
+                            class="w-full h-auto max-h-[85vh] object-contain mx-auto shadow-2xl"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95"
+                            x-transition:enter-end="opacity-100 scale-100">
+                        
+                        <div class="text-center mt-4">
+                            <p x-text="images[activeImage].category" class="text-brand-accent text-xs uppercase tracking-widest mb-1"></p>
+                            <h3 x-text="images[activeImage].title" class="text-white font-serif text-2xl"></h3>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-brand-dark relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <div class="order-2 lg:order-1 space-y-8">
+                    <div>
+                        <p class="text-brand-accent uppercase tracking-[0.2em] text-sm mb-4">Behind the Lens</p>
+                        <h2 class="font-serif text-4xl md:text-5xl text-white leading-tight">
+                            Nicht nur Bilder.<br>
+                            <span class="text-gray-500 italic">Sondern Gefühle.</span>
+                        </h2>
+                    </div>
+
+                    <div class="space-y-6 text-gray-400 font-light leading-relaxed">
+                        <p>
+                            Ich glaube daran, dass ein gutes Foto nicht im Kopf entsteht, sondern im Bauch. 
+                            In einer Welt, die immer lauter wird, suche ich nach den leisen Momenten. 
+                            Den Augenblick zwischen zwei Atemzügen.
+                        </p>
+                        <p>
+                            Seit über 5 Jahren begleite ich Menschen und Marken. Mein Ansatz ist dabei immer derselbe: 
+                            Beobachten, nicht inszenieren. Echtheit statt Perfektion. Denn nur das Echte bleibt.
+                        </p>
+                    </div>
+
+                    <div class="pt-4">
+                        <p class="font-serif text-2xl text-white italic">Niklas Bergmair</p>
+                        </div>
+
+                    <div class="grid grid-cols-3 gap-8 pt-8 border-t border-white/10">
+                        <div>
+                            <span class="block text-3xl font-serif text-brand-accent">5+</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-500">Jahre</span>
+                        </div>
+                        <div>
+                            <span class="block text-3xl font-serif text-brand-accent">150+</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-500">Shoots</span>
+                        </div>
+                        <div>
+                            <span class="block text-3xl font-serif text-brand-accent">100%</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-500">Passion</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 relative group">
+                    <div class="absolute inset-0 border-2 border-brand-accent/30 translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                    
+                    <div class="relative overflow-hidden aspect-[4/5] bg-brand-gray">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Portrait of the Photographer" 
+                             loading="lazy"
+                             class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out">
+                        
+                        <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
+                
+                <div class="space-y-12">
+                    <div>
+                        <p class="text-brand-accent uppercase tracking-[0.2em] text-sm mb-4">Let's create together</p>
+                        <h2 class="font-serif text-4xl md:text-5xl text-white leading-tight">
+                            Bereit für das nächste<br>Projekt?
+                        </h2>
+                    </div>
+
+                    <div class="space-y-6 text-gray-400 font-light">
+                        <p>
+                            Ob Hochzeit, Portrait oder Editorial – ich freue mich auf deine Nachricht. 
+                            Lass uns gemeinsam etwas Zeitloses erschaffen.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <svg class="w-6 h-6 text-brand-accent mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <div>
+                                <h3 class="text-white font-medium">Email</h3>
+                                <a href="mailto:hello@name.photo" class="text-gray-400 hover:text-brand-accent transition-colors">hello@name.photo</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <svg class="w-6 h-6 text-brand-accent mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <div>
+                                <h3 class="text-white font-medium">Studio</h3>
+                                <p class="text-gray-400">Linz, Österreich</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="space-y-8" action="#" method="POST"> <div class="relative group">
+                        <input type="text" id="name" name="name" required 
+                               class="block w-full bg-transparent border-0 border-b border-gray-700 py-3 text-white placeholder-transparent focus:border-brand-accent focus:ring-0 transition-colors peer">
+                        <label for="name" class="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-brand-accent peer-focus:text-xs">
+                            Dein Name
+                        </label>
+                    </div>
+
+                    <div class="relative group">
+                        <input type="email" id="email" name="email" required 
+                               class="block w-full bg-transparent border-0 border-b border-gray-700 py-3 text-white placeholder-transparent focus:border-brand-accent focus:ring-0 transition-colors peer">
+                        <label for="email" class="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-brand-accent peer-focus:text-xs">
+                            Email Adresse
+                        </label>
+                    </div>
+
+                    <div class="relative group">
+                        <textarea id="message" name="message" rows="4" required 
+                                  class="block w-full bg-transparent border-0 border-b border-gray-700 py-3 text-white placeholder-transparent focus:border-brand-accent focus:ring-0 transition-colors peer resize-none"></textarea>
+                        <label for="message" class="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-brand-accent peer-focus:text-xs">
+                            Deine Nachricht
+                        </label>
+                    </div>
+
+                    <button type="submit" class="group relative px-8 py-3 bg-white text-brand-dark font-medium tracking-wider text-sm overflow-hidden transition-all hover:bg-brand-accent w-full md:w-auto">
+                        <span class="relative z-10">NACHRICHT SENDEN</span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-white/5 text-center md:text-left">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            
+            <div>
+                <a href="#" class="font-serif text-xl text-white tracking-wider">
+                    Bergi<span class="text-brand-accent">.</span>PHOTO
+                </a>
+                <p class="text-gray-600 text-xs mt-2">&copy; 2026 Niklas Bergmair. All rights reserved.</p>
+            </div>
+
+            <div class="flex space-x-6">
+                <a href="https://www.instagram.com/n_bergi/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors">
+                    <span class="sr-only">Instagram</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="flex space-x-6 text-xs uppercase tracking-widest text-gray-500">
+                <a href="/impressum.html" class="hover:text-white transition-colors">Impressum</a>
+                <a href="/datenschutz.html" class="hover:text-white transition-colors">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
